@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Command Center · Jackson Investments Group</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦁</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEF1F5;--panel:#fff;--ink:#14233B;--muted:#5E6B7E;--line:#D9DFE7;--gold:#A87F14;--gold-soft:#F5EDD6;--go:#1E7454;--go-soft:#DDF0E7;--stop:#AE3726;--stop-soft:#F7E1DC;--band:#14233B;--band-ink:#F2F4F7;--field:#F7F9FB;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1524;--panel:#15203A;--ink:#E7ECF3;--muted:#98A5B8;--line:#26344F;--gold:#D7AC40;--gold-soft:#3A3120;--go:#4CC08F;--go-soft:#173A2E;--stop:#E8735E;--stop-soft:#43221E;--band:#0A1120;--band-ink:#E7ECF3;--field:#101A2F}}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+a{color:inherit}
+.band{background:var(--band);color:var(--band-ink);padding:22px 20px}
+.wrap{max-width:1240px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.top b{color:#D7AC40;font-stretch:75%;font-weight:800;letter-spacing:.02em}
+h1{font-stretch:68%;font-weight:800;font-size:clamp(30px,5vw,48px);line-height:1;margin:6px 0 0}
+.cta{display:inline-flex;align-items:center;gap:8px;background:#D7AC40;color:#14233B;border-radius:10px;padding:12px 18px;font-weight:800;font-stretch:85%;font-size:16px;text-decoration:none}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.links a{border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:5px 12px;font-size:13px;text-decoration:none;opacity:.9}
+.links a:hover{opacity:1;border-color:#D7AC40}
+main{padding:20px 20px 60px}
+.grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:18px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.panel h2{font-size:18px;font-stretch:80%;font-weight:800;margin:0}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.hint{color:var(--muted);font-size:13px;margin:4px 0 10px}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:7px 12px;cursor:pointer;font-weight:650;font-size:13.5px}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#14233B}
+.btn.small{padding:4px 9px;font-size:12.5px}
+.btn:disabled{opacity:.5;cursor:wait}
+.field,textarea{width:100%;background:var(--field);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+textarea{resize:vertical;line-height:1.45}
+label.f{display:block;font-size:12.5px;font-weight:650;color:var(--muted);margin:12px 0 4px}
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:var(--field);color:var(--muted)}
+.badge.hot{background:var(--go-soft);color:var(--go)}
+.badge.warn{background:var(--stop-soft);color:var(--stop)}
+.alert{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:1fr auto;gap:10px}
+.alert.handled{opacity:.45}
+.alert .who{font-weight:700}
+.alert .meta{font-size:12.5px;color:var(--muted)}
+.alert .txt{margin:4px 0 0;font-size:14px;overflow-wrap:anywhere}
+.alert .acts{display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tab{border:1px solid var(--line);background:transparent;border-radius:999px;padding:4px 11px;font-size:13px;cursor:pointer;color:var(--muted)}
+.tab.on{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.msg textarea{min-height:230px;font-size:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.ev{border-top:1px solid var(--line);padding:10px 0}
+.ev .when{font-weight:800;font-stretch:85%}
+.ev ul{margin:6px 0 0;padding-left:18px;font-size:13.5px}
+.empty{color:var(--muted);font-size:14px;padding:10px 0}
+.stack{display:grid;gap:18px}
+.full{grid-column:1/-1}
+.gate{position:fixed;inset:0;background:var(--band);display:flex;align-items:center;justify-content:center;padding:20px;z-index:20}
+.gate[hidden]{display:none}
+.gate form{background:var(--panel);border-radius:14px;padding:24px;width:100%;max-width:360px}
+.gate b{color:var(--gold);font-stretch:75%;font-weight:800}
+.gate h2{font-stretch:70%;font-weight:800;font-size:30px;margin:6px 0 10px}
+.toast{position:fixed;bottom:calc(18px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:9px 16px;border-radius:999px;font-size:14px;font-weight:650;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30}
+.toast.on{opacity:1}
+.err{color:var(--stop);font-size:13.5px}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12.5px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="gate" id="gate" hidden>
+  <form id="gateForm"><b>Jackson Investments Group</b><h2>Owner sign-in</h2>
+  <input id="pw" class="field" type="password" autocomplete="current-password" aria-label="Owner password" required>
+  <button class="btn gold" style="width:100%;margin-top:12px;padding:12px" type="submit">Open dashboard</button>
+  <p class="err" id="gateErr"></p></form>
+</div>
+
+<header class="band"><div class="wrap">
+  <div class="top">
+    <div><b>Jackson Investments Group</b><h1>Command Center</h1></div>
+    <a class="cta" href="/" target="_blank" rel="noopener">Open Deal Analyzer →</a>
+  </div>
+  <div class="links" id="links"></div>
+</div></header>
+
+<main><div class="wrap grid">
+  <div class="stack">
+    <section class="panel" aria-labelledby="al-h">
+      <div class="ph"><h2 id="al-h">Reddit alerts <span class="badge" id="alCount"></span></h2>
+        <div class="row" style="margin:0"><label class="hint" style="margin:0"><input type="checkbox" id="onlyHot" checked> Interested only</label>
+        <button class="btn small" id="checkNow">Check now</button><button class="btn small" id="clearAll">Mark all handled</button></div></div>
+      <p class="hint" id="lastRun"></p>
+      <div id="alerts"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="msg-h">
+      <div class="ph"><h2 id="msg-h">Hiring messages</h2><button class="btn small" id="addMsg">+ New message</button></div>
+      <p class="hint">Copy fills in your booking link and text number from Settings automatically.</p>
+      <div class="tabs" id="tabs"></div>
+      <div class="msg">
+        <input class="field" id="msgLabel" aria-label="Message name" style="margin-bottom:8px">
+        <textarea id="msgText" aria-label="Message text"></textarea>
+        <div class="row"><button class="btn gold" id="copyMsg">Copy</button><button class="btn" id="saveMsg">Save</button><button class="btn" id="delMsg">Delete</button><span class="hint" id="msgSaved" style="margin:0"></span></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="stack">
+    <section class="panel" aria-labelledby="zm-h">
+      <div class="ph"><h2 id="zm-h">Onboarding sessions</h2><button class="btn small" id="zoomRefresh">Refresh</button></div>
+      <div id="bookingBox"></div>
+      <div id="zoom"><p class="empty">Loading…</p></div>
+    </section>
+
+    <section class="panel" aria-labelledby="rd-h">
+      <div class="ph"><h2 id="rd-h">Reddit watchlist</h2></div>
+      <p class="hint">Checked every 15 minutes. The first check only records what's already there, so you only get alerts on new replies.</p>
+      <label class="f" for="rdInbox">Your accounts: private inbox feed URLs (one per line, optional label first, e.g. "main | https://...")</label>
+      <textarea id="rdInbox" rows="3" class="mono" placeholder="main | https://www.reddit.com/message/inbox/.rss?feed=...&user=..."></textarea>
+      <label class="f" for="rdUsers">Other accounts to watch (usernames, one per line)</label>
+      <textarea id="rdUsers" rows="3" placeholder="va_account_1&#10;va_account_2"></textarea>
+      <label class="f" for="rdPosts">Specific posts to watch (URLs, one per line)</label>
+      <textarea id="rdPosts" rows="3" class="mono" placeholder="https://www.reddit.com/r/forhire/comments/abc123/..."></textarea>
+      <label class="f" for="rdKw">Interest keywords (comma separated)</label>
+      <textarea id="rdKw" rows="3"></textarea>
+      <label class="hint" style="display:block;margin-top:8px"><input type="checkbox" id="rdAll"> Send every new reply to Slack, not just interested ones</label>
+      <div class="row"><button class="btn gold" id="saveReddit">Save watchlist</button><span class="hint" id="rdSaved" style="margin:0"></span></div>
+    </section>
+
+    <section class="panel" aria-labelledby="st-h">
+      <div class="ph"><h2 id="st-h">Settings</h2></div>
+      <label class="f" for="stBooking">Zoom booking link</label><input id="stBooking" class="field" placeholder="https://scheduler.zoom.us/...">
+      <label class="f" for="stNumber">Applicant text number</label><input id="stNumber" class="field" placeholder="(480) 555-0123">
+      <label class="f" for="stTimes">Session times (one per line)</label><textarea id="stTimes" rows="3"></textarea>
+      <label class="f" for="stLinks">Quick links (label | url, one per line)</label><textarea id="stLinks" rows="5" class="mono"></textarea>
+      <label class="f" for="stNotes">Notes</label><textarea id="stNotes" rows="4" placeholder="Rep password: JIG-closers-2026"></textarea>
+      <div class="row"><button class="btn gold" id="saveSettings">Save settings</button><span class="hint" id="stSaved" style="margin:0"></span></div>
+    </section>
+  </div>
+</div></main>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?"":s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}}, del(k){try{localStorage.removeItem(k)}catch(e){}} };
+const KEY = "jig-owner-key";
+let S = null, cur = 0;
+
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("on"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("on"),1600); }
+async function api(path, opts={}){
+  const r = await fetch("/api/admin"+path, { ...opts, headers: { "content-type":"application/json", "x-admin-key": store.get(KEY)||"", ...(opts.headers||{}) } });
+  const j = await r.json().catch(()=>({error:"Bad response"}));
+  if (r.status === 401){ store.del(KEY); $("#gate").hidden=false; throw new Error(j.error); }
+  if (!r.ok || j.error) throw new Error(j.error || "Request failed");
+  return j;
+}
+async function copy(text){
+  try { await navigator.clipboard.writeText(text); toast("Copied"); }
+  catch(e){ const t=document.createElement("textarea"); t.value=text; document.body.appendChild(t); t.select(); try{document.execCommand("copy"); toast("Copied");}catch(_){toast("Select and copy manually");} t.remove(); }
+}
+const fmtTime = iso => { if(!iso) return "Time not set"; const d=new Date(iso); return isNaN(d)? iso : d.toLocaleString([], {weekday:"short", month:"short", day:"numeric", hour:"numeric", minute:"2-digit"}); };
+const ago = iso => { const s=(Date.now()-Date.parse(iso))/1000; if(isNaN(s)) return ""; if(s<60) return "just now"; if(s<3600) return Math.round(s/60)+"m ago"; if(s<86400) return Math.round(s/3600)+"h ago"; return Math.round(s/86400)+"d ago"; };
+
+/* sign-in */
+$("#gateForm").addEventListener("submit", async e => { e.preventDefault(); store.set(KEY, $("#pw").value); $("#gateErr").textContent=""; try { await load(); $("#gate").hidden=true; } catch(err){ $("#gateErr").textContent = err.message; } });
+
+async function load(){
+  S = await api("/state");
+  renderLinks(); renderAlerts(); renderMessages(); renderReddit(); renderSettings(); loadZoom();
+}
+
+/* links */
+function renderLinks(){
+  const links = (S.settings.links||[]);
+  $("#links").innerHTML = links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join("");
+}
+
+/* alerts */
+function renderAlerts(){
+  const hot = $("#onlyHot").checked;
+  const list = (S.alerts||[]).filter(a => !hot || a.interested);
+  const open = (S.alerts||[]).filter(a => a.interested && !a.handled).length;
+  $("#alCount").textContent = open ? open+" new" : ""; $("#alCount").className = "badge" + (open ? " hot" : "");
+  const lr = S.reddit_last_run;
+  $("#lastRun").innerHTML = lr ? `Last check ${ago(lr.at)} · ${lr.new_items} new${lr.first_run?" (first run: recorded existing replies)":""}${(lr.errors||[]).length?` · <span class="err">${esc(lr.errors[0])}</span>`:""}` : "Not checked yet. Add accounts to the watchlist, then hit Check now.";
+  $("#alerts").innerHTML = list.length ? list.slice(0,80).map(a => `
+    <div class="alert ${a.handled?"handled":""}">
+      <div>
+        <div><span class="who">${esc(a.author||"someone")}</span> ${a.interested?`<span class="badge hot">interested</span>`:""}</div>
+        <div class="meta">${esc(a.source)} · ${esc(a.kind)} · ${ago(a.at||a.found_at)}${a.matched&&a.matched.length?` · matched: ${esc(a.matched.join(", "))}`:""}</div>
+        <p class="txt">${esc(a.text||a.title)}</p>
+      </div>
+      <div class="acts">
+        <a class="btn small gold" href="${esc(a.link)}" target="_blank" rel="noopener">Reply</a>
+        <button class="btn small" data-copy="${esc(a.id)}">Copy DM</button>
+        <button class="btn small" data-handle="${esc(a.id)}" data-v="${a.handled?0:1}">${a.handled?"Reopen":"Handled"}</button>
+      </div>
+    </div>`).join("") : `<p class="empty">${hot?"No interested replies yet.":"No replies yet."}</p>`;
+  document.querySelectorAll("[data-handle]").forEach(b => b.addEventListener("click", async () => {
+    const id=b.dataset.handle, v=b.dataset.v==="1"; await api("/alert",{method:"POST",body:JSON.stringify({id,handled:v})});
+    S.alerts.forEach(a=>{ if(a.id===id) a.handled=v; }); renderAlerts();
+  }));
+  document.querySelectorAll("[data-copy]").forEach(b => b.addEventListener("click", () => {
+    const a = S.alerts.find(x=>x.id===b.dataset.copy); const m = S.messages.find(x=>x.id==="dm-reply") || S.messages[0];
+    copy(fill(m.text).replace(/\[name\]/g, (a.author||"").replace(/^\/?u\//,"") || "there"));
+  }));
+}
+$("#onlyHot").addEventListener("change", renderAlerts);
+$("#checkNow").addEventListener("click", async e => { const b=e.target; b.disabled=true; b.textContent="Checking…"; try { const r = await api("/reddit-check",{method:"POST"}); toast(r.first_run?"First run done, watching for new replies":`${r.new_items} new, ${r.interested} interested`); S = await api("/state"); renderAlerts(); } catch(err){ toast(err.message); } b.disabled=false; b.textContent="Check now"; });
+$("#clearAll").addEventListener("click", async () => { await api("/alert",{method:"POST",body:JSON.stringify({all:true,handled:true})}); S.alerts.forEach(a=>a.handled=true); renderAlerts(); });
+
+/* messages */
+function fill(t){
+  const st=S.settings||{};
+  return t.replace(/\[booking link\]|\[link\]/gi, m => st.booking_link || m).replace(/\[your number\]/gi, m => st.text_number || m);
+}
+function renderMessages(){
+  cur = Math.min(cur, S.messages.length-1);
+  $("#tabs").innerHTML = S.messages.map((m,i)=>`<button class="tab ${i===cur?"on":""}" data-i="${i}">${esc(m.label)}</button>`).join("");
+  document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>{ cur=+t.dataset.i; renderMessages(); }));
+  const m = S.messages[cur] || {label:"",text:""};
+  $("#msgLabel").value = m.label; $("#msgText").value = m.text; $("#msgSaved").textContent="";
+}
+async function saveMessages(note){ await api("/save",{method:"POST",body:JSON.stringify({key:"messages",value:S.messages})}); if(note) $("#msgSaved").textContent=note; }
+$("#copyMsg").addEventListener("click", ()=> copy(fill($("#msgText").value)));
+$("#saveMsg").addEventListener("click", async ()=>{ S.messages[cur] = { ...S.messages[cur], label:$("#msgLabel").value.trim()||"Untitled", text:$("#msgText").value }; await saveMessages("Saved"); renderMessages(); $("#msgSaved").textContent="Saved"; });
+$("#addMsg").addEventListener("click", async ()=>{ S.messages.push({ id:"m"+Date.now(), label:"New message", text:"" }); cur=S.messages.length-1; await saveMessages(); renderMessages(); $("#msgLabel").focus(); });
+$("#delMsg").addEventListener("click", async ()=>{ if(S.messages.length<2 || !confirm("Delete this message?")) return; S.messages.splice(cur,1); cur=0; await saveMessages(); renderMessages(); });
+
+/* reddit settings */
+function renderReddit(){
+  const r = S.reddit||{};
+  $("#rdInbox").value = (r.inbox_feeds||[]).map(f => typeof f==="string"? f : (f.label? f.label+" | "+f.url : f.url)).join("\n");
+  $("#rdUsers").value = (r.watch_users||[]).join("\n");
+  $("#rdPosts").value = (r.watch_posts||[]).join("\n");
+  $("#rdKw").value = (r.keywords||[]).join(", ");
+  $("#rdAll").checked = !!r.alert_all;
+}
+const lines = v => v.split("\n").map(x=>x.trim()).filter(Boolean);
+$("#saveReddit").addEventListener("click", async ()=>{
+  S.reddit = {
+    inbox_feeds: lines($("#rdInbox").value).map(l => { const p=l.split("|"); return p.length>1 ? {label:p[0].trim(), url:p.slice(1).join("|").trim()} : {label:"Inbox", url:l}; }),
+    watch_users: lines($("#rdUsers").value).map(u=>u.replace(/^\/?u\//i,"")),
+    watch_posts: lines($("#rdPosts").value),
+    keywords: $("#rdKw").value.split(",").map(x=>x.trim()).filter(Boolean),
+    alert_all: $("#rdAll").checked
+  };
+  await api("/save",{method:"POST",body:JSON.stringify({key:"reddit",value:S.reddit})}); $("#rdSaved").textContent="Saved"; toast("Watchlist saved");
+});
+
+/* settings */
+function renderSettings(){
+  const st = S.settings||{};
+  $("#stBooking").value = st.booking_link||""; $("#stNumber").value = st.text_number||""; $("#stTimes").value = st.session_times||"";
+  $("#stLinks").value = (st.links||[]).map(l=>l.label+" | "+l.url).join("\n"); $("#stNotes").value = st.notes||"";
+  renderBooking();
+}
+function renderBooking(){
+  const st=S.settings||{};
+  $("#bookingBox").innerHTML = `
+    ${st.booking_link ? `<div class="row" style="margin:0 0 8px"><span class="mono" style="overflow-wrap:anywhere">${esc(st.booking_link)}</span><button class="btn small gold" id="cpBook">Copy link</button></div>` : `<p class="hint">Add your Zoom booking link in Settings.</p>`}
+    ${st.session_times ? `<p class="hint" style="margin:0 0 6px"><b>Session times:</b> ${esc(st.session_times).replace(/\n/g," · ")}</p>` : ""}`;
+  const b=$("#cpBook"); if(b) b.addEventListener("click",()=>copy(st.booking_link));
+}
+$("#saveSettings").addEventListener("click", async ()=>{
+  S.settings = { booking_link:$("#stBooking").value.trim(), text_number:$("#stNumber").value.trim(), session_times:$("#stTimes").value.trim(),
+    links: lines($("#stLinks").value).map(l=>{ const p=l.split("|"); return {label:p[0].trim(), url:(p[1]||"").trim()}; }).filter(l=>l.url), notes:$("#stNotes").value };
+  await api("/save",{method:"POST",body:JSON.stringify({key:"settings",value:S.settings})}); $("#stSaved").textContent="Saved"; renderLinks(); renderBooking(); toast("Settings saved");
+});
+
+/* zoom */
+async function loadZoom(){
+  $("#zoom").innerHTML = `<p class="empty">Loading Zoom…</p>`;
+  try {
+    const z = await api("/zoom");
+    if (!z.configured){ $("#zoom").innerHTML = `<p class="empty">Zoom isn't connected yet. Add your Zoom app keys in admin.js to see bookings and attendees here.</p>`; return; }
+    let h = "";
+    if ((z.schedules||[]).length) h += `<p class="hint" style="margin:6px 0"><b>Booking pages:</b> ${z.schedules.map(s => s.link ? `<a href="${esc(s.link)}" target="_blank" rel="noopener">${esc(s.name)}</a>` : esc(s.name)).join(" · ")}</p>`;
+    const ev = z.events||[];
+    h += ev.length ? ev.map(e => `<div class="ev"><div class="when">${esc(fmtTime(e.start))}</div><div class="hint" style="margin:0">${esc(e.title)} · ${e.attendees.length} booked${e.join_url?` · <a href="${esc(e.join_url)}" target="_blank" rel="noopener">Join</a>`:""}</div>
+      ${e.attendees.length?`<ul>${e.attendees.map(a=>`<li>${esc(a.name||"(no name)")}${a.email?` <span class="hint">${esc(a.email)}</span>`:""}</li>`).join("")}</ul>`:""}</div>`).join("")
+      : `<p class="empty">No upcoming bookings.</p>`;
+    if ((z.meetings||[]).length) h += `<p class="hint" style="margin-top:12px"><b>Upcoming Zoom meetings:</b></p>` + z.meetings.slice(0,6).map(m=>`<div class="ev" style="padding:6px 0"><span class="when">${esc(fmtTime(m.start))}</span> · ${esc(m.topic)} ${m.join_url?`· <a href="${esc(m.join_url)}" target="_blank" rel="noopener">Join</a>`:""}</div>`).join("");
+    if ((z.errors||[]).length) h += `<p class="err" style="margin-top:8px">${z.errors.map(esc).join("<br>")}</p>`;
+    $("#zoom").innerHTML = h;
+  } catch(err){ $("#zoom").innerHTML = `<p class="err">${esc(err.message)}</p>`; }
+}
+$("#zoomRefresh").addEventListener("click", loadZoom);
+
+if (!store.get(KEY)) $("#gate").hidden = false; else load().catch(err => { if(!/password/i.test(err.message)) toast(err.message); });
+setInterval(async () => { if (!S || document.hidden) return; try { const n = await api("/state"); S.alerts = n.alerts; S.reddit_last_run = n.reddit_last_run; renderAlerts(); } catch(e){} }, 120000);
+})();
+</script>
+</body>
+</html>
