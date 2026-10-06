@@ -1,17 +1,11 @@
 {
-  "name": "jig-deal-analyzer",
+  "name": "jig-dashboard",
   "main": "worker.js",
   "compatibility_date": "2026-09-01",
   "workers_dev": true,
-  "assets": {
-    "directory": "./public",
-    "binding": "ASSETS"
-  },
+  "assets": { "directory": "./public", "binding": "ASSETS" },
   "kv_namespaces": [
-    { "binding": "DB", "id": "PASTE_KV_ID_HERE" },
-    { "binding": "CACHE", "id": "PASTE_KV_ID_HERE" }
+    { "binding": "DB", "id": "c3880000d191498cb4c533692c3b1aec" }
   ],
-  "triggers": {
-    "crons": ["*/15 * * * *"]
-  }
+  "triggers": { "crons": ["*/15 * * * *"] }
 }
